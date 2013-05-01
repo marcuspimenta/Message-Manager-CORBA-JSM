@@ -1,0 +1,9 @@
+module Comminication{
+	struct Message{
+		string emissor;
+		string corpo;
+	};
+	interface HandlerMessage{
+		string send_msg(in Message email);
+	};
+};
