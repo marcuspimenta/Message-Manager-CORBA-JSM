@@ -21,8 +21,13 @@ public class HandlerMessageImpl extends HandlerMessagePOA{
 	}
 
 	@Override
-	public String retrieveQueueAndTopics() {
-		return "Oi";
+	public String[] retrieveQueueAndTopics() {
+		return new String[]{"Oi"};
+	}
+
+	@Override
+	public String[] retrieveMessages() {
+		return new String[]{"Oi"};
 	}
 
 }

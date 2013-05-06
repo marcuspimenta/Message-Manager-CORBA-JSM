@@ -15,7 +15,7 @@ public class Main {
 		Message message = new Message("Marcus", "Default", "Oi");
 		
 		CorbaClientBusiness corbaClientBusiness = new CorbaClientBusiness();
-		corbaClientBusiness.settingsCorbaClient("yourip", "HandlerMessage", "Corba");
+		corbaClientBusiness.settingsCorbaClient("localhost", "HandlerMessage", "Corba");
 		
 		corbaClientBusiness.sendMessage(message);
 	}

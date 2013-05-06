@@ -1,11 +1,15 @@
 module Comminication{
+	typedef sequence <string> CollectionString;
+
 	struct Message{
 		string issuing;
 		string destination;
 		string body;
 	};
+	
 	interface HandlerMessage{
 		void sendMessage(in Message message);
-		string retrieveQueueAndTopics();
+		messagens retrieveQueueAndTopics();
+		messagens retrieveMessages();
 	};
 };
