@@ -12,7 +12,7 @@ import com.client.corbajms.generatedfilesidl.Message;
 public class Main {
 
 	public static void main(String[] args) {
-		Message message = new Message("Marcus", "Oi");
+		Message message = new Message("Marcus", "Default", "Oi");
 		
 		CorbaClientBusiness corbaClientBusiness = new CorbaClientBusiness();
 		corbaClientBusiness.settingsCorbaClient("yourip", "HandlerMessage", "Corba");

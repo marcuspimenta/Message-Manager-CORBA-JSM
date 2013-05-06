@@ -12,11 +12,17 @@ import com.server.corbajms.generatedfilesidl.Message;
 public class HandlerMessageImpl extends HandlerMessagePOA{
 
 	@Override
-	public String send_msg(Message message) {
-		System.out.println(message.emissor);
-		System.out.println(message.corpo);
+	public void sendMessage(Message message) {
+		System.out.println(message.issuing);
+		System.out.println(message.destination);
+		System.out.println(message.body);
 		
-		return "Mensagem Recebida com sucesso";
+		System.out.println("Mensagem recebida com sucesso");
+	}
+
+	@Override
+	public String retrieveQueueAndTopics() {
+		return "Oi";
 	}
 
 }

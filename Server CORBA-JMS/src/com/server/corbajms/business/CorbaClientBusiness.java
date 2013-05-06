@@ -33,7 +33,7 @@ public class CorbaClientBusiness {
 	}
 	
 	public void sendMessage(Message message){
-		handlerMessage.send_msg(message);
+		handlerMessage.sendMessage(message);
 	}
 
 }

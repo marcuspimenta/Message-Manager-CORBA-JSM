@@ -34,7 +34,7 @@ public class CorbaClientBusiness {
 	
 	public void sendMessage(Message message){
 		try{
-			handlerMessage.send_msg(message);
+			handlerMessage.sendMessage(message);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
