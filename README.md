@@ -5,7 +5,7 @@ Message Manager CORBA JSM
 Implementing a management system using CORBA and JMS Message-Oriented Middleware (MOM). This system has the function of
 manage message queues on a MOM server.
 
-###Running
+##Running
 To run service name:
 ```
 % tnameserv
