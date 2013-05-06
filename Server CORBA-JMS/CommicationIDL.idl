@@ -9,7 +9,7 @@ module Comminication{
 	
 	interface HandlerMessage{
 		void sendMessage(in Message message);
-		messagens retrieveQueueAndTopics();
-		messagens retrieveMessages();
+		CollectionString retrieveQueueAndTopics();
+		CollectionString retrieveMessages();
 	};
 };

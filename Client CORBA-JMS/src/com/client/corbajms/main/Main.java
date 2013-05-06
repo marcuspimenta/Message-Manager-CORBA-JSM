@@ -1,7 +1,6 @@
 package com.client.corbajms.main;
 
-import com.client.corbajms.business.CorbaClientBusiness;
-import com.client.corbajms.generatedfilesidl.Message;
+import com.client.corbajms.business.WindowBusinessLogic;
 
 /**
  * 
@@ -12,12 +11,8 @@ import com.client.corbajms.generatedfilesidl.Message;
 public class Main {
 
 	public static void main(String[] args) {
-		Message message = new Message("Marcus", "Default", "Oi");
-		
-		CorbaClientBusiness corbaClientBusiness = new CorbaClientBusiness();
-		corbaClientBusiness.settingsCorbaClient("localhost", "HandlerMessage", "Corba");
-		
-		corbaClientBusiness.sendMessage(message);
+		WindowBusinessLogic windowBusinessLogic = new WindowBusinessLogic();
+		windowBusinessLogic.builderWindow();
 	}
 	
 }
