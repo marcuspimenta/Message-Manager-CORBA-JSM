@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
 public class Window extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+	
+	private String userName;
+	private String ipServer;
 
 	private JMenuItem menuAbout;
 	private JMenuItem menuExit;
@@ -42,6 +45,31 @@ public class Window extends JFrame implements ActionListener{
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
+		
+		enterUserName();
+		enterIpServer();
+	}
+	
+	public void enterUserName(){
+		userName = "";
+		
+		while(userName == null || (userName != null && userName.trim().equals(""))){
+			userName = JOptionPane.showInputDialog(getContentPane().getParent(),
+										   		   "Enter your name", 
+										   		   "Settings user name",
+										   		   JOptionPane.QUESTION_MESSAGE);
+		}
+	}
+	
+	public void enterIpServer(){
+		ipServer = "";
+		
+		while(ipServer == null || (ipServer != null && ipServer.trim().equals(""))){
+			ipServer = JOptionPane.showInputDialog(getContentPane().getParent(),
+										   		   "Enter ip server (198.168.1.10)", 
+										   		   "Settings ip server communication",
+										   		   JOptionPane.QUESTION_MESSAGE);
+		}
 	}
 
 	@Override
