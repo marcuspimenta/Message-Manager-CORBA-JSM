@@ -14,7 +14,7 @@ public class Main {
 		System.out.println("Server rodando");
 		
 		CorbaServerBusiness corbaServerBusiness = new CorbaServerBusiness();
-		corbaServerBusiness.settingsCorbaService("yourip", "HandlerMessage", "Corba");
+		corbaServerBusiness.settingsCorbaService("localhost", "HandlerMessage", "Corba");
 	}
 	
 }
