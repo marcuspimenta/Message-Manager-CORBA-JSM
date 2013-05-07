@@ -78,7 +78,7 @@ public class Window extends JFrame implements ActionListener{
 			radioPanel.add(jRadioButton);
 		}
 		
-		JButton send = new JButton("Atualizar");
+		JButton send = new JButton("Update");
 		send.addActionListener(this);
 		
 		JPanel jPanel = new JPanel();
@@ -88,7 +88,7 @@ public class Window extends JFrame implements ActionListener{
 		final JPanel panelChat = new JPanel(new BorderLayout());
 		panelChat.add(send, BorderLayout.NORTH);
 		panelChat.add(jPanel, BorderLayout.CENTER);
-		panelChat.setBorder(new TitledBorder("Options"));
+		panelChat.setBorder(new TitledBorder("Available"));
 		
 		return panelChat;
 	}
