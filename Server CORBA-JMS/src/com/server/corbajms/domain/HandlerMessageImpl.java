@@ -12,6 +12,11 @@ import com.server.corbajms.generatedfilesidl.Message;
 public class HandlerMessageImpl extends HandlerMessagePOA{
 
 	@Override
+	public void registerUser(String username) {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
 	public void sendMessage(Message message) {
 		System.out.println(message.issuing);
 		System.out.println(message.destination);
@@ -26,7 +31,7 @@ public class HandlerMessageImpl extends HandlerMessagePOA{
 	}
 
 	@Override
-	public String[] retrieveMessages() {
+	public String[] retrieveMessages(String origin) {
 		return new String[]{"Oi"};
 	}
 

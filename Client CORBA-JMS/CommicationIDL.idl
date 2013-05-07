@@ -8,8 +8,9 @@ module Comminication{
 	};
 	
 	interface HandlerMessage{
+		void registerUser(in string username);
 		void sendMessage(in Message message);
 		CollectionString retrieveQueueAndTopics();
-		CollectionString retrieveMessages();
+		CollectionString retrieveMessages(in string origin);
 	};
 };
