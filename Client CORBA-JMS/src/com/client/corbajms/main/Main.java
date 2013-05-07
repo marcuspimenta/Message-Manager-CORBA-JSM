@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		WindowBusinessLogic windowBusinessLogic = new WindowBusinessLogic();
-		windowBusinessLogic.builderWindow();
+		windowBusinessLogic.settingsInitial();
 	}
 	
 }

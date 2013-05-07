@@ -1,6 +1,5 @@
 package com.client.corbajms.business;
 
-import com.client.corbajms.generatedfilesidl.Message;
 
 /**
  * 
@@ -10,8 +9,8 @@ import com.client.corbajms.generatedfilesidl.Message;
  */
 public interface IBusinessLogic {
 	
-	public abstract void sendMessageListener(Message message);
+	public abstract void settingConectionListener();
 	
-	public abstract void updateQueueAndTopicsListener();
-
+	public abstract void sendMessageListener(String destination, String bodyMessage);
+	
 }

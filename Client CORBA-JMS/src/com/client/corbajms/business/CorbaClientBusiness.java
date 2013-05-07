@@ -20,16 +20,12 @@ public class CorbaClientBusiness {
 		corbaClient = new CorbaClient();
 	}
 	
-	public void settingsCorbaClient(String ipServer, String nameComponent, String kindNameComponent){
-		try {
-			corbaClient.initORB(ipServer);
-			corbaClient.referencesNameService();
-			corbaClient.searchReferencesNameService(nameComponent, kindNameComponent);
-			
-			handlerMessage = HandlerMessageHelper.narrow(corbaClient.getReferenceObj());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void settingsCorbaClient(String ipServer, String nameComponent, String kindNameComponent) throws Exception{
+		corbaClient.initORB(ipServer);
+		corbaClient.referencesNameService();
+		corbaClient.searchReferencesNameService(nameComponent, kindNameComponent);
+		
+		handlerMessage = HandlerMessageHelper.narrow(corbaClient.getReferenceObj());
 	}
 	
 	public void sendMessage(Message message){

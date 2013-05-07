@@ -21,6 +21,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+import com.client.corbajms.business.IBusinessLogic;
+
 /**
  * 
  * @author Marcus Pimenta
@@ -31,70 +33,89 @@ public class Window extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	
-	private String userName;
-	private String ipServer;
-
+	private String selected = "";
+	
 	private JMenuItem menuAbout;
 	private JMenuItem menuExit;
+	private JMenuItem menuRestartCommunication;
+	
+	private JButton buttonUpdate;
+	private JButton buttonSend;
+	
+	private JPanel panel;
+	private JTextArea message;
+	private JTextArea displayAreaMsg;
+	
+	private IBusinessLogic iBusinessLogic;
+	
+	public Window(IBusinessLogic iBusinessLogic){
+		this.iBusinessLogic = iBusinessLogic;
+	}
 	
 	public void builder(){
 		final JMenu optionMenu = new JMenu("Options");
 		
+		menuRestartCommunication = new JMenuItem("Restart Communication");
+		menuRestartCommunication.addActionListener(this);
 		menuAbout = new JMenuItem("About");
 		menuAbout.addActionListener(this);
 		menuExit = new JMenuItem("Exit");
 		menuExit.addActionListener(this);
 		
+		optionMenu.add(menuRestartCommunication);
 		optionMenu.add(menuAbout);
 		optionMenu.add(menuExit);
 		
 		final JMenuBar menu = new JMenuBar();
 		menu.add(optionMenu);
 		
-		add(settingsQueueAndTopic(new String[]{"OI", "bls"}), BorderLayout.WEST);
-		add(settingsViewChat(), BorderLayout.CENTER);
+		settingsQueueAndTopic();
+		settingsViewChat();
 		
 		setTitle("Client Communication CORBA-JMS");
 		setJMenuBar(menu);
 		setSize(550, 300);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
-		
-		enterUserName();
-		enterIpServer();
 	}
 	
-	public JPanel settingsQueueAndTopic(String[] list){
+	public void settingsQueueAndTopic(){
+		buttonUpdate = new JButton("Refresh");
+		buttonUpdate.addActionListener(this);
 		
+		panel = new JPanel(new BorderLayout());
+		panel.add(buttonUpdate, BorderLayout.NORTH);
+		panel.setBorder(new TitledBorder("Available"));
+		
+		add(panel, BorderLayout.WEST);
+	}
+	
+	public void addItens(String[] list){
 		JPanel radioPanel = new JPanel(new GridLayout(0, 1));
 		ButtonGroup group = new ButtonGroup();
 		
 		for (String string : list) {
 			JRadioButton jRadioButton = new JRadioButton(string);
+			jRadioButton.setActionCommand(string);
 			jRadioButton.addActionListener(this);
 			
 			group.add(jRadioButton);
 			radioPanel.add(jRadioButton);
 		}
 		
-		JButton send = new JButton("Update");
-		send.addActionListener(this);
-		
 		JPanel jPanel = new JPanel();
 		jPanel.setSize(1, 1); 
 		jPanel.add(radioPanel);
 		
-		final JPanel panelChat = new JPanel(new BorderLayout());
-		panelChat.add(send, BorderLayout.NORTH);
-		panelChat.add(jPanel, BorderLayout.CENTER);
-		panelChat.setBorder(new TitledBorder("Available"));
+		panel.add(jPanel, BorderLayout.CENTER);
+		add(panel, BorderLayout.WEST);
 		
-		return panelChat;
+		setVisible(true);
 	}
 	
-	public JPanel settingsViewChat(){
-		JTextArea displayAreaMsg = new JTextArea(10, 30);
+	public void settingsViewChat(){
+		displayAreaMsg = new JTextArea(10, 30);
 		displayAreaMsg.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		displayAreaMsg.setLineWrap(true);
 		displayAreaMsg.setEditable(false);
@@ -102,13 +123,13 @@ public class Window extends JFrame implements ActionListener{
 		JScrollPane scrollpane = new JScrollPane(displayAreaMsg);
 		scrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		JTextArea message = new JTextArea(1, 25);
+		message = new JTextArea(1, 25);
 		message.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 		message.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		message.setEditable(true);
 
-		JButton send = new JButton("Send");
-		send.addActionListener(this);
+		buttonSend = new JButton("Send");
+		buttonSend.addActionListener(this);
 		
 		JPanel jPanel = new JPanel();
 		jPanel.setSize(1, 1);  
@@ -117,18 +138,18 @@ public class Window extends JFrame implements ActionListener{
 		panelTextButton.setLayout(new BorderLayout());
 		panelTextButton.add(message, BorderLayout.WEST);
 		panelTextButton.add(jPanel, BorderLayout.CENTER);
-		panelTextButton.add(send, BorderLayout.EAST);
+		panelTextButton.add(buttonSend, BorderLayout.EAST);
 		
 		final JPanel panelChat = new JPanel();
 		panelChat.add(scrollpane, BorderLayout.CENTER);
 		panelChat.add(panelTextButton, BorderLayout.SOUTH);
 		panelChat.setBorder(new TitledBorder("Chat"));
 		
-		return panelChat;
+		add(panelChat, BorderLayout.CENTER);
 	}
 	
-	public void enterUserName(){
-		userName = "";
+	public String enterUserName(){
+		String userName = "";
 		
 		while(userName == null || (userName != null && userName.trim().equals(""))){
 			userName = JOptionPane.showInputDialog(getContentPane().getParent(),
@@ -136,10 +157,12 @@ public class Window extends JFrame implements ActionListener{
 										   		   "Settings user name",
 										   		   JOptionPane.INFORMATION_MESSAGE);
 		}
+		
+		return userName;
 	}
 	
-	public void enterIpServer(){
-		ipServer = "";
+	public String enterIpServer(){
+		String ipServer = "";
 		
 		while(ipServer == null || (ipServer != null && ipServer.trim().equals(""))){
 			ipServer = JOptionPane.showInputDialog(getContentPane().getParent(),
@@ -147,11 +170,16 @@ public class Window extends JFrame implements ActionListener{
 										   		   "Settings ip server communication",
 										   		   JOptionPane.INFORMATION_MESSAGE);
 		}
+		
+		return ipServer;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource() == menuAbout){
+		if(event.getSource() == menuRestartCommunication){
+			displayAreaMsg.setText("");
+			iBusinessLogic.settingConectionListener();
+		}else if(event.getSource() == menuAbout){
 			JOptionPane.showMessageDialog(getContentPane(),
 										  "Communication CORBA-JMS\n\n" +
 										  "Autor:        Marcus Pimenta\n" +
@@ -161,7 +189,28 @@ public class Window extends JFrame implements ActionListener{
 
 		}else if(event.getSource() == menuExit){
 			System.exit(0);
+		}else if(event.getSource() == buttonUpdate){
+			addItens(new String[]{"csd"});
+		}else if(event.getSource() == buttonSend){
+			if(!selected.equals("")){
+				if(message.getText().length() > 0){
+					iBusinessLogic.sendMessageListener(selected, message.getText());
+					printMsgDisplay("You: " + message.getText());
+	   				message.setText("");
+				}else{
+					printMsgDisplay("Input message empty");
+				}
+			}else{
+				printMsgDisplay("Select destination from your message");
+			}
+		}else{
+			selected = event.getActionCommand();
 		}
+	}
+	
+	public void printMsgDisplay(final String message){
+		displayAreaMsg.append(message +"\n");
+		displayAreaMsg.setCaretPosition(displayAreaMsg.getDocument().getLength());
 	}
 	
 }
