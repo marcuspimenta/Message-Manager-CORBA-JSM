@@ -1,6 +1,6 @@
 package com.server.corbajms.main;
 
-import com.server.corbajms.business.CorbaServerBusiness;
+import com.server.corbajms.business.ServerBusinessLogic;
 
 /**
  * 
@@ -11,10 +11,8 @@ import com.server.corbajms.business.CorbaServerBusiness;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("Server rodando");
-		
-		CorbaServerBusiness corbaServerBusiness = new CorbaServerBusiness();
-		corbaServerBusiness.settingsCorbaService("localhost", "HandlerMessage", "Corba");
+		ServerBusinessLogic serverBusinessLogic = new ServerBusinessLogic();
+		serverBusinessLogic.settingsCorbaService();
 	}
 	
 }

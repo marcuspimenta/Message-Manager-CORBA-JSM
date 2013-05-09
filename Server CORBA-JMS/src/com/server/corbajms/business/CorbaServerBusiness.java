@@ -1,6 +1,6 @@
 package com.server.corbajms.business;
 
-import com.server.corbajms.communication.CorbaServer;
+import com.server.corbajms.communication.corba.CorbaServer;
 import com.server.corbajms.domain.HandlerMessageImpl;
 
 /**
@@ -9,14 +9,14 @@ import com.server.corbajms.domain.HandlerMessageImpl;
  * @email mvinicius.pimenta@gmail.com
  * @date 10:19:57 01/05/2013
  */
-public class CorbaServerBusiness {
+public class CorbaServerBusiness{
 	
 	private CorbaServer corbaServer;
 	private HandlerMessageImpl handlerMessageImpl;
 	
-	public CorbaServerBusiness(){
+	public CorbaServerBusiness(IBusinessLogic iBusinessLogic){
 		corbaServer = new CorbaServer();
-		handlerMessageImpl = new HandlerMessageImpl();
+		handlerMessageImpl = new HandlerMessageImpl(iBusinessLogic);
 	}
 	
 	public void settingsCorbaService(String ipServer, String nameComponent, String kindNameComponent){
@@ -33,5 +33,5 @@ public class CorbaServerBusiness {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

@@ -1,5 +1,6 @@
 package com.server.corbajms.domain;
 
+import com.server.corbajms.business.IBusinessLogic;
 import com.server.corbajms.generatedfilesidl.HandlerMessagePOA;
 import com.server.corbajms.generatedfilesidl.Message;
 
@@ -10,29 +11,31 @@ import com.server.corbajms.generatedfilesidl.Message;
  * @date 11:16:19 01/05/2013
  */
 public class HandlerMessageImpl extends HandlerMessagePOA{
+	
+	private IBusinessLogic iBusinessLogic;
+	
+	public HandlerMessageImpl(IBusinessLogic iBusinessLogic){
+		this.iBusinessLogic = iBusinessLogic;
+	}
 
 	@Override
 	public void registerUser(String username) {
-		// TODO Auto-generated method stub
+		iBusinessLogic.registerUser(username);
 	}
 	
 	@Override
 	public void sendMessage(Message message) {
-		System.out.println(message.issuing);
-		System.out.println(message.destination);
-		System.out.println(message.body);
-		
-		System.out.println("Mensagem recebida com sucesso");
+		iBusinessLogic.sendMessage(message);
 	}
 
 	@Override
 	public String[] retrieveQueueAndTopics() {
-		return new String[]{"Oi"};
+		return iBusinessLogic.retrieveQueueAndTopics();
 	}
 
 	@Override
 	public String[] retrieveMessages(String origin) {
-		return new String[]{"Oi"};
+		return iBusinessLogic.retrieveMessages(origin);
 	}
 
 }
