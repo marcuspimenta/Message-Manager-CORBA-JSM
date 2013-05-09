@@ -35,5 +35,22 @@ public class CorbaClientBusiness {
 			e.printStackTrace();
 		}
 	}
+	
+	public void registerUser(String userName){
+		try{
+			handlerMessage.registerUser(userName);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String[] retrieveQueueAndTopics(){
+		try{
+			return handlerMessage.retrieveQueueAndTopics();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

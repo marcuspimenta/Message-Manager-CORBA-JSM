@@ -74,7 +74,7 @@ public class Window extends JFrame implements ActionListener{
 		
 		setTitle("Client Communication CORBA-JMS");
 		setJMenuBar(menu);
-		setSize(550, 300);
+		setSize(580, 300);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
@@ -109,8 +109,10 @@ public class Window extends JFrame implements ActionListener{
 		jPanel.add(radioPanel);
 		
 		panel.add(jPanel, BorderLayout.CENTER);
-		add(panel, BorderLayout.WEST);
 		
+		remove(panel);
+		add(panel, BorderLayout.WEST);
+
 		setVisible(true);
 	}
 	
@@ -190,7 +192,15 @@ public class Window extends JFrame implements ActionListener{
 		}else if(event.getSource() == menuExit){
 			System.exit(0);
 		}else if(event.getSource() == buttonUpdate){
-			addItens(new String[]{"csd"});
+			buttonUpdate.setEnabled(false);
+			
+			String[] list = iBusinessLogic.retrieveQueueAndTopics();
+			
+			if(list.length > 0){
+				addItens(list);
+			}
+			
+			buttonUpdate.setEnabled(true);
 		}else if(event.getSource() == buttonSend){
 			if(!selected.equals("")){
 				if(message.getText().length() > 0){

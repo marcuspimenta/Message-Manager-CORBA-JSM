@@ -30,6 +30,8 @@ public class WindowBusinessLogic implements IBusinessLogic{
 		retrieveUserName();
 		retrieveIpServer();
 		settingsCommunication();
+		
+		registerUser();
 	}
 	
 	public void builderWindow(){
@@ -53,6 +55,18 @@ public class WindowBusinessLogic implements IBusinessLogic{
 		}
 	}
 	
+	public void registerUser(){
+		corbaClientBusiness.registerUser(message.issuing);
+	}
+	
+	@Override
+	public void settingConectionListener() {
+		retrieveIpServer();
+		settingsCommunication();
+		
+		registerUser();
+	}
+	
 	@Override
 	public void sendMessageListener(String destination, String bodyMessage) {
 		message.destination = destination;
@@ -62,9 +76,8 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	}
 
 	@Override
-	public void settingConectionListener() {
-		retrieveIpServer();
-		settingsCommunication();
+	public String[] retrieveQueueAndTopics() {
+		return corbaClientBusiness.retrieveQueueAndTopics();
 	}
 
 }

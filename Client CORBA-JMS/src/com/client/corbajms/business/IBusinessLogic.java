@@ -13,4 +13,6 @@ public interface IBusinessLogic {
 	
 	public abstract void sendMessageListener(String destination, String bodyMessage);
 	
+	public abstract String[] retrieveQueueAndTopics();
+	
 }
