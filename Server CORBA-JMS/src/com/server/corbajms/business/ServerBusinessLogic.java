@@ -13,11 +13,11 @@ import com.server.corbajms.generatedfilesidl.Message;
 public class ServerBusinessLogic implements IBusinessLogic{
 
 	private ArrayList<String> nameUsers;
-	private CorbaServerBusiness corbaServerBusiness;
+	private CorbaServerBusinessLogic corbaServerBusiness;
 	
 	public ServerBusinessLogic(){
 		nameUsers = new ArrayList<String>();
-		corbaServerBusiness = new CorbaServerBusiness(this);
+		corbaServerBusiness = new CorbaServerBusinessLogic(this);
 	}
 	
 	public void settingsCorbaService(){
@@ -31,7 +31,9 @@ public class ServerBusinessLogic implements IBusinessLogic{
 
 	@Override
 	public void sendMessage(Message message) {
-		System.out.println("Message receiver " + message.body);
+		System.out.println("Message receiver - [origin: " + message.issuing + 
+						   ", destination: " + message.destination + 
+						   ", message: " + message.body + "]");
 	}
 
 	@Override

@@ -16,13 +16,13 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	private Window window;
 	
 	private Message message;
-	private CorbaClientBusiness corbaClientBusiness;
+	private CorbaClientBusinessLogic corbaClientBusiness;
 	
 	
 	public WindowBusinessLogic(){
 		window = new Window(this);
 		message = new Message();
-		corbaClientBusiness = new CorbaClientBusiness();
+		corbaClientBusiness = new CorbaClientBusinessLogic();
 	}
 	
 	public void settingsInitial(){
@@ -78,6 +78,11 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	@Override
 	public String[] retrieveQueueAndTopics() {
 		return corbaClientBusiness.retrieveQueueAndTopics();
+	}
+
+	@Override
+	public String[] retrieveMessages(String destination) {
+		return null;
 	}
 
 }

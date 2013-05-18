@@ -11,12 +11,12 @@ import com.client.corbajms.generatedfilesidl.Message;
  * @email mvinicius.pimenta@gmail.com
  * @date 09:49:47 01/05/2013
  */
-public class CorbaClientBusiness {
+public class CorbaClientBusinessLogic {
 	
 	private CorbaClient corbaClient;
 	private HandlerMessage handlerMessage;
 	
-	public CorbaClientBusiness(){
+	public CorbaClientBusinessLogic(){
 		corbaClient = new CorbaClient();
 	}
 	
@@ -47,6 +47,15 @@ public class CorbaClientBusiness {
 	public String[] retrieveQueueAndTopics(){
 		try{
 			return handlerMessage.retrieveQueueAndTopics();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public String[] retrieveMessage(String destination){
+		try{
+			return handlerMessage.retrieveMessages(destination);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return null;

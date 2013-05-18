@@ -46,6 +46,9 @@ public class Window extends JFrame implements ActionListener{
 	private JTextArea message;
 	private JTextArea displayAreaMsg;
 	
+	private JPanel radioPanel;
+	private ButtonGroup group;
+	
 	private IBusinessLogic iBusinessLogic;
 	
 	public Window(IBusinessLogic iBusinessLogic){
@@ -88,12 +91,22 @@ public class Window extends JFrame implements ActionListener{
 		panel.add(buttonUpdate, BorderLayout.NORTH);
 		panel.setBorder(new TitledBorder("Available"));
 		
+		radioPanel = new JPanel(new GridLayout(0, 1));
+		group = new ButtonGroup();
+		
+		JPanel jPanel = new JPanel();
+		jPanel.setSize(1, 1); 
+		jPanel.add(radioPanel);
+		
+		panel.add(jPanel, BorderLayout.CENTER);
+		
+		add(panel, BorderLayout.WEST);
 		add(panel, BorderLayout.WEST);
 	}
 	
 	public void addItens(String[] list){
-		JPanel radioPanel = new JPanel(new GridLayout(0, 1));
-		ButtonGroup group = new ButtonGroup();
+		radioPanel.removeAll();
+		group.clearSelection();
 		
 		for (String string : list) {
 			JRadioButton jRadioButton = new JRadioButton(string);
@@ -104,15 +117,6 @@ public class Window extends JFrame implements ActionListener{
 			radioPanel.add(jRadioButton);
 		}
 		
-		JPanel jPanel = new JPanel();
-		jPanel.setSize(1, 1); 
-		jPanel.add(radioPanel);
-		
-		panel.add(jPanel, BorderLayout.CENTER);
-		
-		remove(panel);
-		add(panel, BorderLayout.WEST);
-
 		setVisible(true);
 	}
 	

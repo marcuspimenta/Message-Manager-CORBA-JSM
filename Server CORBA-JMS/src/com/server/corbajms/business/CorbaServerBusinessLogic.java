@@ -9,12 +9,12 @@ import com.server.corbajms.domain.HandlerMessageImpl;
  * @email mvinicius.pimenta@gmail.com
  * @date 10:19:57 01/05/2013
  */
-public class CorbaServerBusiness{
+public class CorbaServerBusinessLogic{
 	
 	private CorbaServer corbaServer;
 	private HandlerMessageImpl handlerMessageImpl;
 	
-	public CorbaServerBusiness(IBusinessLogic iBusinessLogic){
+	public CorbaServerBusinessLogic(IBusinessLogic iBusinessLogic){
 		corbaServer = new CorbaServer();
 		handlerMessageImpl = new HandlerMessageImpl(iBusinessLogic);
 	}

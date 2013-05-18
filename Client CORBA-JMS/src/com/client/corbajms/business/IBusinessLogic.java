@@ -15,4 +15,6 @@ public interface IBusinessLogic {
 	
 	public abstract String[] retrieveQueueAndTopics();
 	
+	public abstract String[] retrieveMessages(String destination);
+	
 }
