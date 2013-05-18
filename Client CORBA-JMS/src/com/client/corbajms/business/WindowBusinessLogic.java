@@ -1,5 +1,10 @@
 package com.client.corbajms.business;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import com.client.corbajms.communication.VerifyMessage;
 import com.client.corbajms.generatedfilesidl.Message;
 import com.client.corbajms.view.Window;
 
@@ -10,7 +15,12 @@ import com.client.corbajms.view.Window;
  * @date 17:48:19 06/05/2013
  */
 public class WindowBusinessLogic implements IBusinessLogic{
+	
+	private final int THREAD_POOL = 1;
+	private final int TIMER_REPET = 2;
 
+	public static String userName;
+	
 	private String ipServer;
 	
 	private Window window;
@@ -18,11 +28,14 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	private Message message;
 	private CorbaClientBusinessLogic corbaClientBusiness;
 	
+	private ScheduledExecutorService executor;
 	
 	public WindowBusinessLogic(){
 		window = new Window(this);
 		message = new Message();
 		corbaClientBusiness = new CorbaClientBusinessLogic();
+		
+		executor = Executors.newScheduledThreadPool(THREAD_POOL);
 	}
 	
 	public void settingsInitial(){
@@ -32,6 +45,7 @@ public class WindowBusinessLogic implements IBusinessLogic{
 		settingsCommunication();
 		
 		registerUser();
+		startVerify();
 	}
 	
 	public void builderWindow(){
@@ -40,6 +54,7 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	
 	public void retrieveUserName(){
 		message.issuing = window.enterUserName();
+		userName = message.issuing;
 	}
 	
 	public void retrieveIpServer(){
@@ -57,6 +72,14 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	
 	public void registerUser(){
 		corbaClientBusiness.registerUser(message.issuing);
+	}
+	
+	public void startVerify(){
+		executor.scheduleWithFixedDelay((new VerifyMessage(corbaClientBusiness, message.issuing, this)), 0, TIMER_REPET, TimeUnit.SECONDS);
+	}
+	
+	public void stopVerify(){
+		executor.shutdownNow();
 	}
 	
 	@Override
@@ -81,8 +104,8 @@ public class WindowBusinessLogic implements IBusinessLogic{
 	}
 
 	@Override
-	public String[] retrieveMessages(String destination) {
-		return null;
+	public void retrieveMessages(String[] listMessage) {
+		window.printListMsgDisplay(listMessage);
 	}
 
 }

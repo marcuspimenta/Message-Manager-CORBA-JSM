@@ -22,6 +22,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
 import com.client.corbajms.business.IBusinessLogic;
+import com.client.corbajms.business.WindowBusinessLogic;
 
 /**
  * 
@@ -75,6 +76,7 @@ public class Window extends JFrame implements ActionListener{
 		settingsQueueAndTopic();
 		settingsViewChat();
 		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Client Communication CORBA-JMS");
 		setJMenuBar(menu);
 		setSize(580, 300);
@@ -108,13 +110,15 @@ public class Window extends JFrame implements ActionListener{
 		radioPanel.removeAll();
 		group.clearSelection();
 		
-		for (String string : list) {
-			JRadioButton jRadioButton = new JRadioButton(string);
-			jRadioButton.setActionCommand(string);
-			jRadioButton.addActionListener(this);
-			
-			group.add(jRadioButton);
-			radioPanel.add(jRadioButton);
+		for (String name : list) {
+			if(!WindowBusinessLogic.userName.equals(name)){
+				JRadioButton jRadioButton = new JRadioButton(name);
+				jRadioButton.setActionCommand(name);
+				jRadioButton.addActionListener(this);
+				
+				group.add(jRadioButton);
+				radioPanel.add(jRadioButton);
+			}
 		}
 		
 		setVisible(true);
@@ -225,6 +229,12 @@ public class Window extends JFrame implements ActionListener{
 	public void printMsgDisplay(final String message){
 		displayAreaMsg.append(message +"\n");
 		displayAreaMsg.setCaretPosition(displayAreaMsg.getDocument().getLength());
+	}
+	
+	public void printListMsgDisplay(String[] listMsg){
+		for (String message : listMsg) {
+			printMsgDisplay(message);
+		}
 	}
 	
 }

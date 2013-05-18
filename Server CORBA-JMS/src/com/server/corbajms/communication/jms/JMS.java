@@ -44,4 +44,8 @@ public class JMS {
 		return context;
 	}
 	
+	public void cloceJMS() throws NamingException{
+		context.close();
+	}
+	
 }

@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		ServerBusinessLogic serverBusinessLogic = new ServerBusinessLogic();
-		serverBusinessLogic.settingsCorbaService();
+		serverBusinessLogic.settingsCommunication();
 	}
 	
 }
