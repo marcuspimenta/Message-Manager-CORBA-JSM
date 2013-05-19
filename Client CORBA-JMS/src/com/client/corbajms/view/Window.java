@@ -204,7 +204,7 @@ public class Window extends JFrame implements ActionListener{
 			
 			String[] list = iBusinessLogic.retrieveQueueAndTopics();
 			
-			if(list.length > 0){
+			if(list != null && list.length > 0){
 				addItens(list);
 			}
 			
