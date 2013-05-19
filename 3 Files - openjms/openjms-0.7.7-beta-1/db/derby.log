@@ -1,0 +1,6 @@
+----------------------------------------------------------------
+2013-05-19 19:25:51.983 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.1.1.0 - (208786): instance c013800d-013e-be41-51b8-0000029e881a
+on database directory C:\github\Message Manager CORBA JMS\3 Files - openjms\openjms-0.7.7-beta-1\db\openjmsdb 
+
+Database Class Loader started - derby.database.classpath=''
