@@ -3,7 +3,7 @@ Message Manager CORBA JSM
 
 ##About
 Implementing a management system using CORBA and JMS Message-Oriented Middleware (MOM). This system has the function of
-manage message queues on a MOM server. The system have a client and server communication. This client send message by way of
+manage message on a MOM server. The system have a client and server communication. This client send message by way of
 CORBA, and server using CORBA and JMS. 
 
 Client CORBA <-> [Server CORBA <-> Server JMS]
@@ -30,7 +30,7 @@ After run servece name and openjms start server communication
 The server communication communication no have graphic interface, all events are shown on the terminal
 <p align="center"> <img src="2 Files - imagens/window-server.png"/> </p>
 
-Now run client communication
+After run server communication start client communication
 ```
 % java -jar client-corbajms.jar
 ```
@@ -38,7 +38,7 @@ Now run client communication
 First user enter your name
 <p align="center"> <img src="2 Files - imagens/window-client-2.png"/> </p>
 
-Second input ip server
+Second user enter ip server
 <p align="center"> <img src="2 Files - imagens/window-client-3.png"/> </p>
 
 The refresh button update list user names logged in server. If user send message for other user and this no more logged
